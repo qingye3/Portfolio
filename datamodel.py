@@ -54,10 +54,10 @@ class Commit(db.Model):
         return self
 
     def parent_nodes(self):
-        return [e.parent_node for e in self.parent_edges()]
+        return [e.parent_node for e in self.parent_edges]
 
     def child_nodes(self):
-        return [e.parent_node for e in self.child_edges()]
+        return [e.child_node for e in self.child_edges]
 
 
 class CommitDependency(db.Model):
@@ -70,10 +70,10 @@ class CommitDependency(db.Model):
                               primary_key=True)
     child_node = db.relationship(Commit,
                                  primaryjoin=child_hexsha == Commit.hexsha,
-                                 backref='child_edges')
+                                 backref='parent_edges')
     parent_node = db.relationship(Commit,
                                   primaryjoin=parent_hexsha == Commit.hexsha,
-                                  backref='parent_edges')
+                                  backref='child_edges')
 
     def __init__(self, child, parent):
         self.child_node = child

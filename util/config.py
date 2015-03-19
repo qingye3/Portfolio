@@ -6,7 +6,7 @@ csair = {
 
 chess = {
     "name": "chess",
-    "repo_url": "https://github.com/qingye3/csair.git",
+    "repo_url": "https://github.com/qingye3/chess.git",
     "display_name": "Chess"
 }
 
@@ -16,5 +16,5 @@ test = {
     "display_name": "Test"
 }
 
-projects = [csair, chess, test]
+projects = [test, csair, chess]
 local_repo_path = "/home/qingye3/Development/temp_repo"

@@ -12,12 +12,53 @@
 
 
 {% block upper_block %}
+    <h4>{{ project_info["display_name"]}}</h4>
+    <ul>
+        <li> Repository: {{ project_info["repo_url"]}} </li>
+        <li> Last commit: {{ project_info["date"]}} </li>
+    </ul>
+    <p>
+        {{ project_info["message"] }}
+    </p>
 {% endblock %}
 
+{% block middle_block %}
+    <h4> File tree </h4>
+    <ul>
+        {% for name, hexsha, is_dir, size in tree_table %}
+            {% if is_dir %}
+                <li> name</li>
+            {% else %}
+                <li> <a href="/Source/{{ project_info["name"]}}/{{hexsha}}" class="tiny secondary button">{{ name }} : {{ size }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}
 {% block lower_block %}
 {% endblock %}
 
 {% block sidebar %}
+    <div class="panel">
+        <h5> Commit Information</h5>
+        <h5> {{ commit_info["hash"] }} </h5>
+        <ul>
+            <li> {{ commit_info["author_name"] }} </li>
+            <li> {{ commit_info["author_email"] }} </li>
+            <li> {{ commit_info["authored_date"] }} </li>
+        </ul>
+        <p>
+            {{ commit_info["message"]}}
+        </p>
+    </div>
+    <h5> Commits: </h5>
+    <form method="POST">
+        <ul class="stack button-group">
+            {% for fullhash, partialhash in commit_names %}
+                <li><input type="submit" name="commit" value="{{fullhash}}" class="tiny button expand"></li>
+            {% endfor %}
+        </ul>
+
+    </form>
 {% endblock %}
 
 {% block bottom%}

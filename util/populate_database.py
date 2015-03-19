@@ -53,6 +53,7 @@ def insert_commits_for_proj(repo_path):
                               author_email=commit.author.email,
                               authored_date=commit.authored_date)
         commit_dict[commit.hexsha] = commit_model
+
     for commit in repo.iter_commits():
         for parent_commit in commit.parents:
             commit_dict[commit.hexsha].add_parent(commit_dict[parent_commit.hexsha])
@@ -86,7 +87,6 @@ def add_tree_recursive(tree, commit_model, is_root):
 
 def insert_trees_for_proj(repo_path):
     repo = git.Repo(repo_path)
-    commit_dict = dict()
     for commit in repo.iter_commits():
         commit_model = Commit.query.filter_by(hexsha=commit.hexsha).first()
         add_tree_recursive(commit.tree, commit_model, True)
@@ -99,15 +99,20 @@ def insert_trees():
 
 
 if __name__ == "__main__":
+    print "dropping tabls"
     db.drop_all()
+    print "creating schema"
     db.create_all()
     db.session.commit()
 
+    print "inserting projects"
     insert_projects()
     db.session.commit()
 
+    print "inserting commits"
     insert_commits()
     db.session.commit()
 
+    print "inserting trees"
     insert_trees()
     db.session.commit()
