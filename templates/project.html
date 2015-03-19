@@ -27,7 +27,7 @@
     <ul>
         {% for name, hexsha, is_dir, size in tree_table %}
             {% if is_dir %}
-                <li> name</li>
+                <li> {{ name }}</li>
             {% else %}
                 <li> <a href="/Source/{{ project_info["name"]}}/{{hexsha}}" class="tiny secondary button">{{ name }} : {{ size }}</a></li>
             {% endif %}

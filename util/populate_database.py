@@ -68,13 +68,16 @@ def insert_commits():
         insert_commits_for_proj(repo_path)
 
 
-def add_tree_recursive(tree, commit_model, is_root):
+def add_tree_recursive(tree, commit_model, parent=None):
     tree_model = Tree(hexsha=tree.hexsha,
                       commit=commit_model,
+                      parent=parent,
                       name=tree.name,
                       is_dir=True,
                       size=0)
     db.session.add(tree_model)
+    for tree in tree.trees:
+        add_tree_recursive(tree, commit_model, tree_model)
     for blob in tree.blobs:
         blob_model = Tree(hexsha=blob.hexsha,
                           commit=commit_model,
@@ -89,7 +92,7 @@ def insert_trees_for_proj(repo_path):
     repo = git.Repo(repo_path)
     for commit in repo.iter_commits():
         commit_model = Commit.query.filter_by(hexsha=commit.hexsha).first()
-        add_tree_recursive(commit.tree, commit_model, True)
+        add_tree_recursive(commit.tree, commit_model)
 
 
 def insert_trees():

@@ -51,19 +51,19 @@ def get_project_info(project_model):
 
 
 def get_tree_table(root, result, depth=0):
-    for tree in [d for d in root.children if d.is_dir]:
-        result.append((
-            tree.name,
-            tree.hexsha,
-            tree.is_dir,
-            tree.size))
-        get_tree_table(tree, result, depth + 1)
     for tree in [d for d in root.children if not d.is_dir]:
-        result.append((
-            tree.name,
-            tree.hexsha,
-            tree.is_dir,
-            tree.size))
+        result.append((tree.name,
+                       tree.hexsha,
+                       tree.is_dir,
+                       tree.size))
+    for tree in [d for d in root.children if d.is_dir]:
+        result.append(("+" * depth +
+                       tree.name,
+                       tree.hexsha,
+                       tree.is_dir,
+                       tree.size))
+        get_tree_table(tree, result, depth + 1)
+
 
 @app.route("/Source/<repo_name>/<source_hash>", methods=['GET'])
 def source(repo_name, source_hash):
@@ -83,7 +83,7 @@ def project(project_name):
     projects = datamodel.Project.query.all()
     commit_model = datamodel.Commit.query.filter_by(hexsha=commit_hash).first_or_404()
     head_commit = datamodel.Commit.query.filter_by(hexsha=project_model.head_hexsha).first_or_404()
-    commit_info = get_commit_info(head_commit)
+    commit_info = get_commit_info(commit_model)
     tree_table = list()
     tree_model = datamodel.Tree.query.filter_by(commit=commit_model).first_or_404()
     get_tree_table(tree_model, tree_table)
@@ -91,7 +91,7 @@ def project(project_name):
                            project_name=project_model.display_name,
                            project_info=get_project_info(project_model),
                            projects_dict=get_projects_dict(projects),
-                           commit_names=get_commit_names(commit_model),
+                           commit_names=get_commit_names(head_commit),
                            commit_info=commit_info,
                            tree_table=tree_table)
 
