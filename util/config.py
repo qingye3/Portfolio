@@ -13,7 +13,7 @@ chess = {
 test = {
     "name": "portfolio_test",
     "repo_url": "https://github.com/qingye3/portfolio_test.git",
-    "display_name": "Test Repo With Branches"
+    "display_name": "Test"
 }
 
 projects = [csair, chess, test]

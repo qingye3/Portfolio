@@ -8,6 +8,8 @@ import os
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ["PORTFOLIO_DB_URL"]
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+app.debug = True
+
 db = SQLAlchemy(app)
 
 

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="558166072">
-    <data-source source="LOCAL" name="Heroku DB" uuid="55ce56ab-ffd8-458a-bf1f-14799a292412">
+  <component name="DataSourceManagerImpl" format="xml" hash="2282836221">
+    <data-source source="LOCAL" name="SQLite -" uuid="96d54ee7-a68e-4807-a21a-919fdd4f2bc4">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test_db.db</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="remote" uuid="5df054f4-40f2-477a-9dee-44f07ad8ad6a">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
@@ -10,13 +17,6 @@
         <property name="ssl" value="true" />
         <property name="sslfactory" value="org.postgresql.ssl.NonValidatingFactory" />
       </driver-properties>
-      <libraries />
-    </data-source>
-    <data-source source="LOCAL" name="SQLite" uuid="60b5f77b-f15e-47f0-a084-42fd00646d67">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test_db.db</jdbc-url>
       <libraries />
     </data-source>
   </component>

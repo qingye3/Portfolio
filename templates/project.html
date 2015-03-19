@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block project_title %} |{{ project_name }} {% endblock %}
+
+{% block top_nav %}
+    <ul class="button-group">
+    {% for key, value in projects_dict.iteritems() %}
+        <li><a href="{{url_for("project", project_name=key)}}" class="button">{{value}}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+
+
+{% block upper_block %}
+{% endblock %}
+
+{% block lower_block %}
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+
+{% block bottom%}
+{% endblock %}

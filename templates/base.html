@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--Built from the template on the foundation website: http://foundation.zurb.com/templates/blog.html-->
+<html class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths" lang="en" data-useragent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.89 Safari/537.36"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qing Ye's Portfolio {% block project_title %} {% endblock %} </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/foundation.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+    <script src="{{url_for('static', filename='js/vendor/modernizer.js') }}"></script>
+    <script src="{{url_for('static', filename='js/vendor/jquery.js') }}"></script>
+    <script src="{{url_for('static', filename='js/foundation.min.js') }}"></script>
+<body>
+
+<div class="row">
+    <div class="large-12 columns">
+        <div class="nav-bar right">
+            {% block top_nav %}
+            {% endblock %}
+        </div>
+        <h1>Qing Ye's <small> CS242 Repository</small></h1>
+        <hr>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="large-9 columns" role="content">
+        {% block upper_block %}
+        {% endblock %}
+        <hr>
+        {% block lower_block %}
+        {% endblock %}
+    </div>
+
+
+    <aside class="large-3 columns">
+        {% block sidebar %}
+        {% endblock %}
+    </aside>
+
+</div>
+
+
+<footer class="row">
+    <div class="large-12 columns">
+        {% block bottom%}
+        {% endblock %}
+    </div>
+</footer>
+
+</body><div class="gr-context gr-dict gr-context-loader gr-dict-freemium" style="display: none;"><span class="gr-triangle"></span><div class="gr-placeholder"></div><a href="http://www.grammarly.com/?utm_source=dict&utm_medium=link&utm_campaign=chrome_plg" target="_blank" class="gr-hint-settings"></a><strong class="gr-title"></strong><div class="gr-dict-content"></div></div><div class="b-freemium-editor" style="display: none;"><div class="b-freemium-editor-back"></div><iframe class="gr-freemium-ifr"></iframe></div></html>
