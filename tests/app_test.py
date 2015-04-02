@@ -21,6 +21,7 @@ class TestApp(TestCase):
         comment = datamodel.Comment.query.filter_by(author="some_lonely_author").first()
         self.assertEqual(comment.content, "some_comment")
         datamodel.db.session.delete(comment)
+        datamodel.db.session.commit()
 
     def test_red_words(self):
         app.submit_comment("some_lonely_author", "Fuck, you deserve to die.")
@@ -28,11 +29,13 @@ class TestApp(TestCase):
         self.assertTrue(self.cannot_find_word("Fuck", comment.content))
         self.assertTrue(self.cannot_find_word("die", comment.content))
         datamodel.db.session.delete(comment)
+        datamodel.db.session.commit()
 
     def test_SQL_injection(self):
         app.submit_comment("some_lonely_author", "; DROP TABLE comments;")
         comment = datamodel.Comment.query.filter_by(author="some_lonely_author").first()
         datamodel.db.session.delete(comment)
+        datamodel.db.session.commit()
 
     def test_XSS(self):
         app.submit_comment("some_lonely_author", '</textarea> <a href="some_dummy_url"> stuff </a>')
@@ -41,3 +44,4 @@ class TestApp(TestCase):
         self.assertTrue(self.cannot_find('</textarea>', rendered))
         self.assertTrue(self.cannot_find('<a href', rendered))
         datamodel.db.session.delete(comment)
+        datamodel.db.session.commit()
