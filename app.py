@@ -10,6 +10,7 @@ import base64
 import pygithub3
 import profanity_filter
 import jinja2
+db = datamodel.db
 
 
 def get_projects_dict(projects):
