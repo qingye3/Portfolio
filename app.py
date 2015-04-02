@@ -4,9 +4,12 @@ __author__ = 'qingye3'
 
 from flask import render_template, Flask, session, request
 from datamodel import app
+import datetime
 import datamodel
 import base64
 import pygithub3
+import profanity_filter
+import jinja2
 
 
 def get_projects_dict(projects):
@@ -73,13 +76,38 @@ def source(repo_name, source_hash):
                            content=base64.b64decode(gh.git_data.blobs.get(source_hash).content))
 
 
+def filter(input):
+    clean_input = profanity_filter.filter(input)
+    escaped_input = str(jinja2.utils.escape(clean_input))
+    return escaped_input
+
+
+def submit_comment(author, content):
+    comment = datamodel.Comment(author=filter(author), content=filter(content), date=datetime.datetime.now())
+    datamodel.db.session.add(comment)
+    datamodel.db.session.commit()
+
+
+def get_comments():
+    ret = []
+    for comment in datamodel.Comment.query.order_by(datamodel.Comment.date).all():
+        ret.append((comment.author, comment.content, str(comment.date)))
+    print ret
+    return ret
+
+
+
 @app.route("/Project/<project_name>", methods=['GET', 'POST'])
 def project(project_name):
     project_model = datamodel.Project.query.filter_by(name=project_name).first_or_404()
     if request.method == "GET":
         commit_hash = project_model.head_hexsha
     if request.method == "POST":
-        commit_hash = request.form["commit"]
+        if "commit" in request.form:
+            commit_hash = request.form["commit"]
+        else:
+            commit_hash = project_model.head_hexsha
+            submit_comment(request.form["comment_author"], request.form["comment_content"])
     projects = datamodel.Project.query.all()
     commit_model = datamodel.Commit.query.filter_by(hexsha=commit_hash).first_or_404()
     head_commit = datamodel.Commit.query.filter_by(hexsha=project_model.head_hexsha).first_or_404()
@@ -91,9 +119,11 @@ def project(project_name):
                            project_name=project_model.display_name,
                            project_info=get_project_info(project_model),
                            projects_dict=get_projects_dict(projects),
+                           comments=get_comments(),
                            commit_names=get_commit_names(head_commit),
                            commit_info=commit_info,
                            tree_table=tree_table)
 
 if __name__ == "__main__":
     app.run()
+    app.debug = True

@@ -35,6 +35,19 @@
     </ul>
 {% endblock %}
 {% block lower_block %}
+    <h4>Comment</h4>
+        {% for author, content, date in comments %}
+        <div class="panel">
+            <h5>{{ author }} on {{date}} says:</h5>
+            <p> {{content}} </p>
+        </div>
+        {% endfor %}
+    <h4>New Comment</h4>
+    <form method="POST">
+        <input type="text" name="comment_author" class="twelve" placeholder="Name">
+        <textarea placeholder="Comment" name="comment_content"> </textarea>
+        <input type="submit" name="submit_comment"  class="tiny button expand">
+    </form>
 {% endblock %}
 
 {% block sidebar %}

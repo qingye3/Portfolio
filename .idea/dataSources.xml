@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="804643695">
+  <component name="DataSourceManagerImpl" format="xml" hash="507626625">
     <data-source source="LOCAL" name="SQLite -" uuid="96d54ee7-a68e-4807-a21a-919fdd4f2bc4">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test_db.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test_2.db</jdbc-url>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="remote" uuid="5df054f4-40f2-477a-9dee-44f07ad8ad6a">
@@ -17,13 +17,6 @@
         <property name="ssl" value="true" />
         <property name="sslfactory" value="org.postgresql.ssl.NonValidatingFactory" />
       </driver-properties>
-      <libraries />
-    </data-source>
-    <data-source source="LOCAL" name="SQLite - [2]" uuid="83202d03-b377-49f7-984b-26396f72c614">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/test_2.db</jdbc-url>
       <libraries />
     </data-source>
   </component>

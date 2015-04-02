@@ -11,6 +11,12 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.debug = True
 
 db = SQLAlchemy(app)
+class Comment(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.Date)
+    author = db.Column(db.Text)
+    content = db.Column(db.Text)
 
 
 class Tree(db.Model):
@@ -78,3 +84,6 @@ class CommitDependency(db.Model):
     def __init__(self, child, parent):
         self.child_node = child
         self.parent_node = parent
+
+if __name__ == "__main__":
+    db.create_all()
