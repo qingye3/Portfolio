@@ -5,10 +5,20 @@ import re
 
 
 def replace(match):
+    """
+    replacer for re.sub
+    :param match: re.match object
+    :return: replacing string
+    """
     bad_word = match.group()
     return bad_word[0] + '*'*(len(bad_word) - 2) + bad_word[-1]
 
 
 def filter(text):
-    regex = re.compile(r'\b(%s)\b'%"|".join(bad_words), re.IGNORECASE)
+    """
+    replace bad words in the text with clean words
+    :param text: text to be filtered
+    :return: filtered words
+    """
+    regex = re.compile(r'\b(%s)\b' % "|".join(bad_words), re.IGNORECASE)
     return regex.sub(replace, text)

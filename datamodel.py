@@ -11,6 +11,8 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.debug = True
 
 db = SQLAlchemy(app)
+
+
 class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
