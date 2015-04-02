@@ -21,6 +21,7 @@ class Comment(db.Model):
     content = db.Column(db.Text)
 
 
+# Tree represents directory and files. Uses the word 'Tree' to be consistent with git jargons
 class Tree(db.Model):
     __tablename__ = 'trees'
     id = db.Column(db.Integer, primary_key=True)
@@ -38,8 +39,8 @@ class Tree(db.Model):
 class Project(db.Model):
     __tablename__ = "projects"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
-    display_name = db.Column(db.String(255))
+    name = db.Column(db.String(255))  # name is the name of the repo
+    display_name = db.Column(db.String(255))  # display name is the name you want to use on the website
     repo_url = db.Column(db.Text)
     date = db.Column(db.BigInteger)
     message = db.Column(db.Text)

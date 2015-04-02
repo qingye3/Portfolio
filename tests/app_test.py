@@ -38,7 +38,7 @@ class TestApp(TestCase):
         datamodel.db.session.commit()
 
     def test_XSS(self):
-        app.submit_comment("some_lonely_author", '</textarea> <a href="some_dummy_url"> stuff </a>')
+        app.submit_comment("some_lonely_author", '</p> <a href="some_dummy_url"> stuff </a> <p>')
         comment = datamodel.Comment.query.filter_by(author="some_lonely_author").first()
         rendered = str(jinja2.utils.escape(comment.content))
         self.assertTrue(self.cannot_find('</textarea>', rendered))

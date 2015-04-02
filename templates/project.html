@@ -11,6 +11,7 @@
 {% endblock %}
 
 
+{# The project infomation #}
 {% block upper_block %}
     <h4>{{ project_info["display_name"]}}</h4>
     <ul>
@@ -22,6 +23,7 @@
     </p>
 {% endblock %}
 
+{# The file tree #}
 {% block middle_block %}
     <h4> File tree </h4>
     <ul>
@@ -34,6 +36,8 @@
         {% endfor %}
     </ul>
 {% endblock %}
+
+{# The comments #}
 {% block lower_block %}
     <h4>Comment</h4>
         {% for author, content, date in comments %}
@@ -43,6 +47,7 @@
         </div>
         {% endfor %}
     <h4>New Comment</h4>
+    {# form for making comments #}
     <form method="POST">
         <input type="text" name="comment_author" class="twelve" placeholder="Name">
         <textarea placeholder="Comment" name="comment_content"> </textarea>
@@ -64,6 +69,7 @@
         </p>
     </div>
     <h5> Commits: </h5>
+    {# form for choosing a commit #}
     <form method="POST">
         <ul class="stack button-group">
             {% for fullhash, partialhash in commit_names %}
