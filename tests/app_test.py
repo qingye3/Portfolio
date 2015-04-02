@@ -2,6 +2,7 @@ from unittest import TestCase
 import datamodel
 import app
 import re
+import jinja2
 
 __author__ = 'qingye3'
 
@@ -36,6 +37,7 @@ class TestApp(TestCase):
     def test_XSS(self):
         app.submit_comment("some_lonely_author", '</textarea> <a href="some_dummy_url"> stuff </a>')
         comment = datamodel.Comment.query.filter_by(author="some_lonely_author").first()
-        self.assertTrue(self.cannot_find('</textarea>', comment.content))
-        self.assertTrue(self.cannot_find('<a href', comment.content))
+        rendered = str(jinja2.utils.escape(comment.content))
+        self.assertTrue(self.cannot_find('</textarea>', rendered))
+        self.assertTrue(self.cannot_find('<a href', rendered))
         datamodel.db.session.delete(comment)

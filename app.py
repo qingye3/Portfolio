@@ -114,8 +114,7 @@ def filter(input):
     :return: filtered text free of red words and XSS attack
     """
     clean_input = profanity_filter.filter(input)
-    escaped_input = str(jinja2.utils.escape(clean_input))
-    return escaped_input
+    return clean_input
 
 
 def submit_comment(author, content):
